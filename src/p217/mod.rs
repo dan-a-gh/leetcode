@@ -1,3 +1,5 @@
+// Leetcode problem 217 submission
+
 pub fn contains_duplicate(nums: Vec<i32>) -> bool {
     let len = nums.len();
     let mut nums = nums;

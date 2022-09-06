@@ -18,7 +18,7 @@ mod tests {
     use super::contains_duplicate;
 
     #[test]
-    fn positive_case () {
+    fn positive_case() {
         let x = vec![2, 2, 3, 5];
         assert!(contains_duplicate(x));
     }

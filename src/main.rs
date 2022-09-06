@@ -1,6 +1,7 @@
+mod p1;
 mod p217;
 mod p242;
-mod p1;
+mod p36;
 mod p49;
 
 fn main() {
@@ -17,7 +18,13 @@ fn main() {
     println!("p242: Is anagram?: {}", answer);
 
     // p49
-    let strs = vec!["eat".to_string(), "tea".to_string(), "ate".to_string(), "nat".to_string(), "bat".to_string()];
+    let strs = vec![
+        "eat".to_string(),
+        "tea".to_string(),
+        "ate".to_string(),
+        "nat".to_string(),
+        "bat".to_string(),
+    ];
     let answer = p49::group_anagrams(strs);
     println!("p49: Grouped anagrams:{:?}", answer);
 }

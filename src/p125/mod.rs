@@ -1,16 +1,11 @@
 // p125 Valid Palindrome
 pub fn is_palindrome(s: String) -> bool {
-    let s1: String = s.to_lowercase();
-    let s1: String = s1.chars()
-        .filter(|x| x.is_ascii_alphanumeric())
-        .collect::<String>();
-    
-    let s2 = s1.clone()
+    let iter = s
         .chars()
-        .rev()
-        .collect::<String>();
+        .filter(|c| c.is_ascii_alphanumeric())
+        .map(|c| c.to_ascii_lowercase());
 
-    s1 == s2
+    iter.clone().eq(iter.rev())
 }
 
 #[cfg(test)]

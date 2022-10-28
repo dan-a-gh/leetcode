@@ -1,32 +1,36 @@
-pub fn three_sum(nums: Vec<i32>) -> Vec<Vec<i32>> {
+pub fn three_sum(mut nums: Vec<i32>) -> Vec<Vec<i32>> {
     let mut result: Vec<Vec<i32>> = Vec::new();
+    nums.sort_unstable();
 
-    let ref_nums = &nums;
+    for (smallest_i, smallest) in nums.iter().enumerate() {
+        // This skips duplicate values in sorted vec
+        if smallest_i > 0 && *smallest == nums[smallest_i - 1] {
+            continue;
+        }
 
-    for (i, val_i) in ref_nums.iter().enumerate() {
-        let mut rm_i_nums = nums.clone();
-        rm_i_nums.remove(i);
-        
-        for (j, val_j) in rm_i_nums.iter().enumerate() {
-            let mut rm_j_nums = rm_i_nums.clone();
-            rm_j_nums.remove(j);
-            
-            for k in rm_j_nums {
-                if val_i + val_j + k != 0 {
-                    continue;
-                } else {
-                    let mut output = vec![*val_i, *val_j, k];
-                    output.sort_unstable();
-                    result.push(output);
+        let smallest: i32 = *smallest;
+
+        // Starts in the next position in nums after smallest
+        let mut left_smaller_i: usize = smallest_i + 1;
+        // Starts in last position of nums
+        let mut right_bigger_i: usize = nums.len() - 1;
+
+        while left_smaller_i < right_bigger_i {
+            let three_sum: i32 = smallest + nums[left_smaller_i] + nums[right_bigger_i];
+            if three_sum > 0 {
+                right_bigger_i -= 1;
+            } else if three_sum < 0 {
+                left_smaller_i += 1;
+            } else {
+                result.push(vec![smallest, nums[left_smaller_i], nums[right_bigger_i]]);
+                left_smaller_i += 1;
+                while nums[left_smaller_i] == nums[left_smaller_i - 1] && left_smaller_i < right_bigger_i {
+                    left_smaller_i += 1;
                 }
             }
         }
     }
-
-    result.sort_unstable();
-    result.dedup();
-
-    result
+    return result;
 }
 
 #[cfg(test)]

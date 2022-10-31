@@ -8,8 +8,6 @@ pub fn contains_nearby_duplicate(nums: Vec<i32>, k: i32) -> bool {
         indices.push(i);
     }
 
-    println!("{:?}", hashmap);
-
     let mut result: bool = false;
 
     // Tagged to allow breaking outer loops as well

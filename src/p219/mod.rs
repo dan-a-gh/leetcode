@@ -15,8 +15,7 @@ pub fn contains_nearby_duplicate(nums: Vec<i32>, k: i32) -> bool {
     // Tagged to allow breaking outer loops as well
     'outer: for num in hashmap {
         let (_, v) = num;
-        let v2 = v.clone();
-        for (i, previous_index) in v2.iter().enumerate() {
+        for (i, previous_index) in v.iter().enumerate() {
             if i < v.len() - 1 {
                 for j in &v[i+1..] {
                     if usize::abs_diff(*j, *previous_index) <= k as usize {

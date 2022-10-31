@@ -18,7 +18,8 @@ pub fn contains_nearby_duplicate(nums: Vec<i32>, k: i32) -> bool {
         for (i, previous_index) in v.iter().enumerate() {
             if i < v.len() - 1 {
                 for j in &v[i+1..] {
-                    if usize::abs_diff(*j, *previous_index) <= k as usize {
+                    let diff = *j as i32 - *previous_index as i32;
+                    if i32::abs(diff) <= k {
                         result = true;
                         // breaks loops
                         break 'outer;

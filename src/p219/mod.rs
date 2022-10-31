@@ -1,33 +1,15 @@
 use std::collections::HashMap;
 
 pub fn contains_nearby_duplicate(nums: Vec<i32>, k: i32) -> bool {
-    let mut hashmap: HashMap<i32, Vec<usize>> = HashMap::new(); 
-    
+    let mut hashmap = HashMap::new(); 
     for (i, num) in nums.iter().enumerate() {
-        let indices = hashmap.entry(*num).or_insert(vec![]);
-        indices.push(i);
-    }
-
-    let mut result: bool = false;
-
-    // Tagged to allow breaking outer loops as well
-    'outer: for num in hashmap {
-        let (_, v) = num;
-        for (i, previous_index) in v.iter().enumerate() {
-            if i < v.len() - 1 {
-                for j in &v[i+1..] {
-                    let diff = *j as i32 - *previous_index as i32;
-                    if i32::abs(diff) <= k {
-                        result = true;
-                        // breaks loops
-                        break 'outer;
-                    };
-                }
+        if let Some(j) = hashmap.insert(num, i) {
+            if (i as i32) - (j as i32) <= k {
+                return true;
             }
         }
     }
-
-    result
+    return false;
 }
 
 #[cfg(test)]
